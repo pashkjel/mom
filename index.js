@@ -93,7 +93,9 @@ async function playSong(guild, song) {
     const serverQueue = queue.get(guild.id);
 
     if (!song) {
-        serverQueue.connection.destroy();
+        if (serverQueue.connection != null) {
+            serverQueue.connection.destroy();
+        }
         queue.delete(guild.id);
         return;
     }
